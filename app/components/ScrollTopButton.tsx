@@ -9,11 +9,11 @@ interface ScrollTopButtonProps {
 
 export default function ScrollTopButton({ children }: ScrollTopButtonProps) {
     const handleClick = (event: MouseEvent<HTMLDivElement>) => {
-        const anchor = ((event.target as HTMLDivElement).ownerDocument || document).querySelector('#back-to-top-anchor');
-        if (anchor) anchor.scrollIntoView({ block: 'center' });
+        const anchor = ((event.target as HTMLDivElement).ownerDocument || document).querySelector('#appbar');
+        if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
-    const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 100 });
+    const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 64.03 });
 
     return (
         <Fade in={trigger}>
