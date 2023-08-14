@@ -1,5 +1,7 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
+import Fab from '@mui/material/Fab';
 import { json } from '@remix-run/node';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useChangeLanguage } from 'remix-i18next';
@@ -7,8 +9,8 @@ import { useTranslation } from 'react-i18next';
 import type { LinksFunction, LoaderArgs, LoaderFunction, V2_MetaFunction } from '@remix-run/node';
 
 import i18next from '~/i18next.server';
-import Header from './components/Header';
 import Navbar from './components/Navbar';
+import ScrollTopButton from './components/ScrollTopButton';
 import theme from './utilities/theme';
 
 export const links: LinksFunction = () => [...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : [])];
@@ -42,9 +44,13 @@ export default function App() {
             </head>
             <body style={{ margin: 0 }}>
                 <ThemeProvider theme={theme}>
-                    <Header />
                     <Navbar />
                     <Outlet />
+                    <ScrollTopButton>
+                        <Fab aria-label={'scroll back to top'} color={'primary'}>
+                            <KeyboardArrowUpIcon />
+                        </Fab>
+                    </ScrollTopButton>
                 </ThemeProvider>
                 <ScrollRestoration />
                 <Scripts />
