@@ -23,6 +23,7 @@
         "react-dom": "^18.2.0",
         "react-i18next": "^13.1.2",
         "react-responsive": "^9.0.2",
+        "react-world-flags": "^1.5.1",
         "remix-i18next": "^5.3.0",
         "source-map-support": "^0.5.21"
     },
