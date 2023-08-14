@@ -3,12 +3,10 @@ import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useChangeLanguage } from 'remix-i18next';
-import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
 import type { LinksFunction, LoaderArgs, LoaderFunction, V2_MetaFunction } from '@remix-run/node';
 
 import i18next from '~/i18next.server';
-import Header from './components/Header';
 import Navbar from './components/Navbar';
 import theme from './utilities/theme';
 
@@ -33,8 +31,6 @@ export default function App() {
 
     useChangeLanguage(locale);
 
-    const isMobile = useMediaQuery({ maxWidth: 768 });
-
     return (
         <html lang={locale} dir={i18n.dir()}>
             <head>
@@ -45,7 +41,6 @@ export default function App() {
             </head>
             <body style={{ margin: 0 }}>
                 <ThemeProvider theme={theme}>
-                    {isMobile ? null : <Header />}
                     <Navbar />
                     <Outlet />
                 </ThemeProvider>
