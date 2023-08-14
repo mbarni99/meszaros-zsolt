@@ -1,10 +1,12 @@
-import { MouseEvent, useState } from 'react';
+import { Fragment, MouseEvent, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
 import { Link } from '@remix-run/react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import Flag from 'react-world-flags';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -15,6 +17,8 @@ import Typography from '@mui/material/Typography';
 
 export default function Navbar() {
     const { i18n, t } = useTranslation();
+
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -97,9 +101,23 @@ export default function Navbar() {
                         ))}
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
-                        <IconButton onClick={(event: MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget)} sx={{ p: 0 }}>
-                            <PublicIcon fontSize={'large'} />
-                        </IconButton>
+                        {isTabletOrMobile ? (
+                            <IconButton onClick={(event: MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget)} sx={{ p: 0 }}>
+                                <PublicIcon fontSize={'large'} />
+                            </IconButton>
+                        ) : (
+                            <Fragment>
+                                <Button onClick={() => i18n.changeLanguage('de')}>
+                                    <Flag code={'de'} height={i18n.language === 'de' ? '32' : '24'} />
+                                </Button>
+                                <Button onClick={() => i18n.changeLanguage('en')}>
+                                    <Flag code={'gb'} height={i18n.language === 'en' ? '32' : '24'} />
+                                </Button>
+                                <Button onClick={() => i18n.changeLanguage('hu')}>
+                                    <Flag code={'hu'} height={i18n.language === 'hu' ? '32' : '24'} />
+                                </Button>
+                            </Fragment>
+                        )}
                         <Menu
                             anchorEl={anchorElUser}
                             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
