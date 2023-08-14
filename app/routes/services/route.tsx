@@ -1,8 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import Grid from '@mui/material/Unstable_Grid2';
 import Grow from '@mui/material/Grow';
+import type { V2_MetaFunction } from '@remix-run/node';
 
 import ServiceCard from '~/components/ServiceCard';
+
+export const meta: V2_MetaFunction = () => [
+    { name: 'description', content: 'Tekintse meg szolgáltatásaink széles kínálatát!' },
+    { title: 'Szolgáltatásaink - Mészáros Zsolt egyéni vállalkozó' },
+];
 
 export default function OurServices() {
     const { t } = useTranslation();

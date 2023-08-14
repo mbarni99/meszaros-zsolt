@@ -4,7 +4,7 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderD
 import { ThemeProvider } from '@mui/material/styles';
 import { useChangeLanguage } from 'remix-i18next';
 import { useTranslation } from 'react-i18next';
-import type { LinksFunction, LoaderArgs, LoaderFunction } from '@remix-run/node';
+import type { LinksFunction, LoaderArgs, LoaderFunction, V2_MetaFunction } from '@remix-run/node';
 
 import i18next from '~/i18next.server';
 import Header from './components/Header';
@@ -17,6 +17,13 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     let locale = await i18next.getLocale(request);
     return json({ locale });
 };
+
+export const meta: V2_MetaFunction = () => [
+    { name: 'author', content: 'Mészáros Barnabás' },
+    { name: 'description', content: 'Mészáros Zsolt egyéni vállakozó - villanyszerelés, napelem telepítés.' },
+    { name: 'keywords', content: 'Mészáros Zsolt, villanyszerelés, napelem, elektromos autó' },
+    { title: 'Mészáros Zsolt egyéni vállalkozó' },
+];
 
 export default function App() {
     const { i18n } = useTranslation();

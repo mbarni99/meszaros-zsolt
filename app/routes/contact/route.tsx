@@ -11,6 +11,12 @@ import Paper from '@mui/material/Paper';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import type { V2_MetaFunction } from '@remix-run/node';
+
+export const meta: V2_MetaFunction = () => [
+    { name: 'description', content: 'Keressen minket bizalommal!' },
+    { title: 'Kapcsolat - Mészáros Zsolt egyéni vállalkozó' },
+];
 
 const lengths = { message: 1000, sender: 50, subject: 100 };
 
