@@ -1,13 +1,15 @@
-import { useTranslation } from 'react-i18next';
-import { useChangeLanguage } from 'remix-i18next';
 import { cssBundleHref } from '@remix-run/css-bundle';
 import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react';
+import { ThemeProvider } from '@mui/material/styles';
+import { useChangeLanguage } from 'remix-i18next';
+import { useTranslation } from 'react-i18next';
 import type { LinksFunction, LoaderArgs, LoaderFunction } from '@remix-run/node';
 
 import i18next from '~/i18next.server';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
+import theme from './utilities/theme';
 
 export const links: LinksFunction = () => [...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : [])];
 
@@ -32,9 +34,11 @@ export default function App() {
                 <Links />
             </head>
             <body style={{ margin: 0 }}>
-                <Header />
-                <Navbar />
-                <Outlet />
+                <ThemeProvider theme={theme}>
+                    <Header />
+                    <Navbar />
+                    <Outlet />
+                </ThemeProvider>
                 <ScrollRestoration />
                 <Scripts />
                 <LiveReload />

@@ -42,6 +42,7 @@ export default function Contact() {
                                             <EmailIcon />
                                         </InputAdornment>
                                     ),
+                                    sx: { borderRadius: '20px' },
                                 }}
                                 label={t('contact_sender_label')}
                                 name={'sender'}
@@ -59,6 +60,7 @@ export default function Contact() {
                                             <ClassIcon />
                                         </InputAdornment>
                                     ),
+                                    sx: { borderRadius: '20px' },
                                 }}
                                 label={t('contact_subject_label')}
                                 name={'subject'}
@@ -71,6 +73,7 @@ export default function Contact() {
                                     endAdornment: (
                                         <InputAdornment position={'end'}>{`${message?.length}/${lengths.message}`}</InputAdornment>
                                     ),
+                                    sx: { borderRadius: '20px' },
                                 }}
                                 label={t('contact_message_label')}
                                 maxRows={12}
