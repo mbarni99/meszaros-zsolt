@@ -62,7 +62,7 @@ export default function Header() {
                         </Fab>
                     </Grid>
                     <Grid container justifyContent={'flex-end'} xs={'auto'}>
-                        <RadioGroup onChange={handleChange} row value={i18n.resolvedLanguage}>
+                        <RadioGroup onChange={handleChange} row value={i18n.language}>
                             <Radio
                                 checkedIcon={<img alt={t('language_english')} src={flagUs} style={{ height: '24px', width: 'auto' }} />}
                                 icon={<img alt={t('language_english')} src={flagUs} style={{ height: '16px', width: 'auto' }} />}
