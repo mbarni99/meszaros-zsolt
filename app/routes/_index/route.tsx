@@ -9,7 +9,7 @@ export default function Index() {
                 <Typography variant={'h4'}>Győrben és Győr vonzáskörzetében</Typography>
                 <Grid paddingY={2} xs={12} />
                 <Typography color={'text.secondary'} variant={'h6'}>
-                    Napelem rendszerek kivitelezése (akkumulátor/autótöltő/hőszivattyú csatlakoztatása igény szerint)
+                    Napelem rendszerek kivitelezése (akkumulátor/autótöltő csatlakoztatása igény szerint)
                 </Typography>
                 <Typography color={'text.secondary'} variant={'h6'}>
                     Régi és új házak, lakások teljes körű villanyszerelése
