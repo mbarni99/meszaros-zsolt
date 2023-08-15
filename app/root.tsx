@@ -8,6 +8,7 @@ import { useChangeLanguage } from 'remix-i18next';
 import { useTranslation } from 'react-i18next';
 import type { LinksFunction, LoaderArgs, LoaderFunction, V2_MetaFunction } from '@remix-run/node';
 
+import Footer from './components/Footer';
 import i18next from '~/i18next.server';
 import Navbar from './components/Navbar';
 import ScrollTopButton from './components/ScrollTopButton';
@@ -46,6 +47,7 @@ export default function App() {
                 <ThemeProvider theme={theme}>
                     <Navbar />
                     <Outlet />
+                    <Footer />
                     <ScrollTopButton>
                         <Fab aria-label={'scroll back to top'} color={'primary'}>
                             <KeyboardArrowUpIcon />

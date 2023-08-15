@@ -17,7 +17,6 @@ export default function Index() {
                 <Typography color={'text.secondary'} variant={'h6'}>
                     Elektromos autótöltők üzembehelyezése
                 </Typography>
-                <Grid paddingY={2} xs={12} />
                 <Typography variant={'h6'}>Keressen minket bizalommal!</Typography>
             </Grid>
         </Grow>

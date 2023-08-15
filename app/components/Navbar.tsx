@@ -95,7 +95,7 @@ export default function Navbar() {
                     </Typography>
                     <Box sx={{ display: { md: 'flex', xs: 'none' }, flexGrow: 1 }}>
                         {links.map((link, index) => (
-                            <Button component={Link} key={index} sx={{ color: 'white', display: 'block', my: 2 }} to={link.route}>
+                            <Button component={Link} key={index} sx={{ color: 'inherit', display: 'block', my: 2 }} to={link.route}>
                                 {t(link.translationKey)}
                             </Button>
                         ))}

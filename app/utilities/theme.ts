@@ -10,8 +10,8 @@ const theme = createTheme({
         MuiTextField: { defaultProps: { fullWidth: true, margin: 'dense', size: 'small' } },
     },
     palette: {
-        primary: { main: '#663399' },
-        secondary: { main: '#E6E6FA' },
+        primary: { light: 'daf569', main: '#b9df47', dark: '#96cc29' },
+        secondary: { light: '#b3f2e7', main: '#73e6d3', dark: '#6cb' },
     },
 });
 
