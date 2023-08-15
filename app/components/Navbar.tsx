@@ -1,7 +1,7 @@
 import { Fragment, MouseEvent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
-import { Link } from '@remix-run/react';
+import { Link, useLocation } from '@remix-run/react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -17,6 +17,8 @@ import Typography from '@mui/material/Typography';
 
 export default function Navbar() {
     const { i18n, t } = useTranslation();
+
+    const { pathname } = useLocation();
 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
@@ -95,8 +97,15 @@ export default function Navbar() {
                             <Button
                                 component={Link}
                                 key={index}
-                                sx={{ color: 'inherit', display: 'block', fontWeight: 'bold', my: 2 }}
+                                sx={{
+                                    borderColor: 'black',
+                                    color: 'inherit',
+                                    display: 'block',
+                                    fontWeight: 'bold',
+                                    my: 2,
+                                }}
                                 to={link.route}
+                                variant={pathname === link.route ? 'outlined' : 'text'}
                             >
                                 {t(link.translationKey)}
                             </Button>
