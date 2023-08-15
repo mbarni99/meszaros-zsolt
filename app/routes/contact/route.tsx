@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, useNavigation } from 'react-router-dom';
+import Chip from '@mui/material/Chip';
 import ClassIcon from '@mui/icons-material/Class';
 import EmailIcon from '@mui/icons-material/Email';
 import Grid from '@mui/material/Unstable_Grid2';
 import Grow from '@mui/material/Grow';
+import HomeIcon from '@mui/icons-material/Home';
 import InputAdornment from '@mui/material/InputAdornment';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Paper from '@mui/material/Paper';
+import PhoneIcon from '@mui/icons-material/Phone';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -31,13 +34,33 @@ export default function Contact() {
 
     return (
         <Grow in={true}>
-            <Grid container justifyContent={'center'} p={1} xs={12}>
-                <Grid xs={12} md={8} xl={6}>
-                    <Form method={'post'}>
-                        <Paper elevation={8} sx={{ padding: 1 }}>
-                            <Typography align={'center'} gutterBottom variant={'h5'}>
-                                {t('contact_title')}
+            <Grid alignItems={'stretch'} container justifyContent={'center'} p={1} xs={12}>
+                <Grid xs={12} md={6} p={1} xl={4}>
+                    <Paper elevation={8} sx={{ padding: 1, height: '100%' }}>
+                        <Grid xs={12}>
+                            <Typography align={'center'} variant={'h4'}>
+                                {t('contact_data_title')}
                             </Typography>
+                        </Grid>
+                        <Grid py={1} xs={12}>
+                            <Typography align={'justify'} color={'text.secondary'}>
+                                {t('contact_data_description')}
+                            </Typography>
+                        </Grid>
+                        <Grid py={1} xs={12}>
+                            <Chip icon={<PhoneIcon />} label={t('contact_data_phone_number')} />
+                        </Grid>
+                        <Grid py={1} xs={12}>
+                            <Chip icon={<EmailIcon />} label={t('contact_data_email_address')} />
+                        </Grid>
+                        <Grid py={1} xs={12}>
+                            <Chip icon={<HomeIcon />} label={t('contact_data_address')} />
+                        </Grid>
+                    </Paper>
+                </Grid>
+                <Grid xs={12} md={6} p={1} xl={4}>
+                    <Paper elevation={8} sx={{ padding: 1, height: '100%' }}>
+                        <Form method={'post'}>
                             <TextField
                                 autoFocus
                                 inputProps={{ maxLength: lengths.sender }}
@@ -50,7 +73,7 @@ export default function Contact() {
                                     ),
                                     sx: { borderRadius: '20px' },
                                 }}
-                                label={t('contact_sender_label')}
+                                label={t('contact_form_sender')}
                                 name={'sender'}
                                 onChange={(e) => setSender(e.target.value)}
                                 value={sender}
@@ -68,7 +91,7 @@ export default function Contact() {
                                     ),
                                     sx: { borderRadius: '20px' },
                                 }}
-                                label={t('contact_subject_label')}
+                                label={t('contact_form_subject')}
                                 name={'subject'}
                                 onChange={(e) => setSubject(e.target.value)}
                                 value={subject}
@@ -81,7 +104,7 @@ export default function Contact() {
                                     ),
                                     sx: { borderRadius: '20px' },
                                 }}
-                                label={t('contact_message_label')}
+                                label={t('contact_form_message')}
                                 maxRows={12}
                                 minRows={8}
                                 multiline
@@ -91,11 +114,11 @@ export default function Contact() {
                             />
                             <Grid xs={12}>
                                 <LoadingButton endIcon={<SendIcon />} loading={state === 'submitting'}>
-                                    {t('contact_submit')}
+                                    {t('contact_form_submit')}
                                 </LoadingButton>
                             </Grid>
-                        </Paper>
-                    </Form>
+                        </Form>
+                    </Paper>
                 </Grid>
             </Grid>
         </Grow>
