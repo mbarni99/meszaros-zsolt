@@ -4,12 +4,12 @@
     "contact_subject_label": "Subject",
     "contact_submit": "Send mail",
     "contact_title": "Contact us",
-    "language_hungarian": "Hungarian",
-    "language_english": "English",
+    "home_description": "Keressen minket bizalommal!",
+    "home_title": "Győrben és Győr vonzáskörzetében",
     "navbar_contact": "Contact",
     "navbar_home": "Home",
     "navbar_services": "Services",
-    "service_1_description": "(?) Napelem rendszerek kivitelezése (akkumulátor/autótöltő csatlakoztatása igény szerint)",
+    "service_1_description": "Napelem rendszerek kivitelezése (akkumulátor, autótöltő csatlakoztatása igény szerint)",
     "service_1_title": "Solar energy",
     "service_2_description": "(!) Régi és új házak, lakások teljes körű villanyszerelése",
     "service_2_title": "Electrical installations",
@@ -27,6 +27,6 @@
     "service_8_title": "Electric gates",
     "service_9_description": "(?) Elektromos háztartási nagygépek üzembe helyezése, cseréje, villanymotorok beüzemelése",
     "service_9_title": "Household",
-    "service_10_description": "(?) Elektromos autótöltők üzembehelyezése",
+    "service_10_description": "Autótöltők, CarPortok (napelemes gépkocsibeálló) telepítése",
     "service_10_title": "Electric vehicles"
 }

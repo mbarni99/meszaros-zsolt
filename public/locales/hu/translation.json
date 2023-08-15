@@ -4,8 +4,8 @@
     "contact_subject_label": "Tárgy",
     "contact_submit": "Levél küldése",
     "contact_title": "Kapcsolat",
-    "language_hungarian": "Magyar",
-    "language_english": "Angol",
+    "home_description": "Keressen minket bizalommal!",
+    "home_title": "Győrben és Győr vonzáskörzetében",
     "navbar_contact": "Kapcsolat",
     "navbar_home": "Kezdőlap",
     "navbar_services": "Szolgáltatásaink",
@@ -27,6 +27,6 @@
     "service_8_title": "Elektromos kapu",
     "service_9_description": "Elektromos háztartási nagygépek üzembe helyezése, cseréje, villanymotorok beüzemelése",
     "service_9_title": "Háztartás",
-    "service_10_description": "Autótöltők üzembehelyezése, cseréje",
+    "service_10_description": "Autótöltők, CarPortok (napelemes gépkocsibeálló) telepítése",
     "service_10_title": "Elektromos autózás"
 }
