@@ -38,11 +38,10 @@ export default function Navbar() {
                         sx={{
                             color: 'inherit',
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
+                            fontWeight: 'bold',
                             letterSpacing: '.3rem',
-                            mr: 2,
-                            textDecoration: 'none',
+                            mr: 4,
+                            textTransform: 'uppercase',
                         }}
                         variant={'h6'}
                     >
@@ -83,11 +82,9 @@ export default function Navbar() {
                             color: 'inherit',
                             display: { md: 'none', xs: 'flex' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
+                            fontWeight: 'bold',
                             mr: 2,
-                            textDecoration: 'none',
+                            textTransform: 'uppercase',
                         }}
                         textAlign={'center'}
                     >
@@ -95,7 +92,12 @@ export default function Navbar() {
                     </Typography>
                     <Box sx={{ display: { md: 'flex', xs: 'none' }, flexGrow: 1 }}>
                         {links.map((link, index) => (
-                            <Button component={Link} key={index} sx={{ color: 'inherit', display: 'block', my: 2 }} to={link.route}>
+                            <Button
+                                component={Link}
+                                key={index}
+                                sx={{ color: 'inherit', display: 'block', fontWeight: 'bold', my: 2 }}
+                                to={link.route}
+                            >
                                 {t(link.translationKey)}
                             </Button>
                         ))}
