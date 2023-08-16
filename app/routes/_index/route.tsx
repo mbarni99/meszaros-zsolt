@@ -21,7 +21,7 @@ export default function Index() {
         <Grow in={true}>
             <Grid container justifyContent={'center'} p={2} xs={12}>
                 <Grid md={6} sm={10} xs={12}>
-                    <section id={'section-main'}>
+                    <section id={'section-activities'}>
                         <Typography align={'center'} variant={'h4'}>
                             {t('home_title')}
                         </Typography>
@@ -30,19 +30,19 @@ export default function Index() {
                                 <ListItemIcon>
                                     <SolarPowerIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={t('service_1_description')} />
+                                <ListItemText primary={t('home_activity_1')} />
                             </ListItem>
                             <ListItem>
                                 <ListItemIcon>
                                     <MapsHomeWorkIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={t('service_2_description')} />
+                                <ListItemText primary={t('home_activity_2')} />
                             </ListItem>
                             <ListItem>
                                 <ListItemIcon>
                                     <ElectricCarIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={t('service_10_description')} />
+                                <ListItemText primary={t('home_activity_3')} />
                             </ListItem>
                         </List>
                         <Typography align={'center'} variant={'h6'}>
