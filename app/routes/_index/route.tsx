@@ -1,3 +1,4 @@
+import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -17,15 +18,19 @@ import Typography from '@mui/material/Typography';
 export default function Index() {
     const { t } = useTranslation();
 
+    const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
+
     return (
-        <Grow in={true}>
-            <Grid container justifyContent={'center'} p={2} xs={12}>
-                <Grid md={6} sm={10} xs={12}>
+        <Grid alignItems={'stretch'} container justifyContent={'center'} p={1} xs={12}>
+            <Grow in>
+                <Grid md={5} p={1} sm={6} xl={4} xs={12}>
                     <section id={'section-activities'}>
-                        <Typography align={'center'} variant={'h4'}>
-                            {t('home_title')}
-                        </Typography>
-                        <List>
+                        <Grid py={isMobile ? 1 : 4} xs={12}>
+                            <Typography align={isMobile ? 'center' : undefined} variant={isMobile ? 'h5' : 'h4'}>
+                                {t('home_title')}
+                            </Typography>
+                        </Grid>
+                        <List disablePadding>
                             <ListItem>
                                 <ListItemIcon>
                                     <SolarPowerIcon />
@@ -45,14 +50,17 @@ export default function Index() {
                                 <ListItemText primary={t('home_activity_3')} />
                             </ListItem>
                         </List>
-                        <Typography align={'center'} variant={'h6'}>
-                            {t('home_description')}
-                        </Typography>
                     </section>
+                </Grid>
+            </Grow>
+            <Grow in>
+                <Grid md={5} p={1} sm={6} xl={4} xs={12}>
                     <section id={'section-faq'}>
-                        <Typography align={'center'} variant={'h4'}>
-                            {t('home_title_faq')}
-                        </Typography>
+                        <Grid pb={isMobile ? 2 : 4} pt={isMobile ? 1 : 4} xs={12}>
+                            <Typography align={isMobile ? 'center' : undefined} variant={isMobile ? 'h5' : 'h4'}>
+                                {t('home_title_faq')}
+                            </Typography>
+                        </Grid>
                         <Accordion>
                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                 <Typography>{t('home_faq_1_title')}</Typography>
@@ -79,7 +87,7 @@ export default function Index() {
                         </Accordion>
                     </section>
                 </Grid>
-            </Grid>
-        </Grow>
+            </Grow>
+        </Grid>
     );
 }
