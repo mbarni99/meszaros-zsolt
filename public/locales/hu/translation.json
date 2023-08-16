@@ -1,5 +1,5 @@
 {
-    "contact_data_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since th 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "contact_data_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since th 1500s.",
     "contact_data_address": "9024 Győr, Illyés Gyula utca 2.",
     "contact_data_email_address": "zsoltm340@gmail.com",
     "contact_data_phone_number": "+36 30/411-97-85",
@@ -8,10 +8,10 @@
     "contact_form_sender": "Az Ön e-mail címe",
     "contact_form_subject": "Tárgy",
     "contact_form_submit": "Levél küldése",
+    "contact_form_title": "Kontaktieren Sie uns für ein individuelles Angebot!",
     "home_activity_1": "Nepelem rendszerek üzembe helyezése",
     "home_activity_2": "Teljeskörű villanyszerelés, részleges villamoshálózati felújítás",
     "home_activity_3": "Elektromos autó töltők, CarPortok (napelemes gépkocsibeállók) telepítése",
-    "home_description": "Keressen minket bizalommal!",
     "home_title": "Győrben és Győr vonzáskörzetében",
     "home_title_faq": "Gyakori kérdések",
     "home_faq_1_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since th 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
