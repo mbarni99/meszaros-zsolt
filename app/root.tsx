@@ -46,7 +46,9 @@ export default function App() {
             <body style={{ margin: 0 }}>
                 <ThemeProvider theme={theme}>
                     <Navbar />
-                    <Outlet />
+                    <main>
+                        <Outlet />
+                    </main>
                     <Footer />
                     <ScrollTopButton>
                         <Fab aria-label={'scroll back to top'} color={'primary'}>

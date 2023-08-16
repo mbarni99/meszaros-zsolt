@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import Grid from '@mui/material/Unstable_Grid2';
 import Grow from '@mui/material/Grow';
+import Typography from '@mui/material/Typography';
 import type { V2_MetaFunction } from '@remix-run/node';
 
 import ServiceCard from '~/components/ServiceCard';
@@ -15,7 +16,12 @@ export default function OurServices() {
 
     return (
         <Grow in={true}>
-            <Grid container>
+            <Grid container xs={12}>
+                <Grid py={1} xs={12}>
+                    <Typography align={'center'} variant={'h4'}>
+                        {t('services_title')}
+                    </Typography>
+                </Grid>
                 <ServiceCard description={t('service_1_description')} title={t('service_1_title')} />
                 <ServiceCard description={t('service_2_description')} title={t('service_2_title')} />
                 <ServiceCard description={t('service_3_description')} title={t('service_3_title')} />
