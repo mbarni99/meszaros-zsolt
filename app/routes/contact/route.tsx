@@ -68,7 +68,6 @@ export default function Contact() {
                         </Grid>
                         <Form method={'post'}>
                             <TextField
-                                autoFocus
                                 inputProps={{ maxLength: lengths.sender }}
                                 InputProps={{
                                     endAdornment: <InputAdornment position={'end'}>{`${sender?.length}/${lengths.sender}`}</InputAdornment>,
