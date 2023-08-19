@@ -28,7 +28,8 @@
         "react-responsive": "^9.0.2",
         "react-world-flags": "^1.5.1",
         "remix-i18next": "^5.3.0",
-        "source-map-support": "^0.5.21"
+        "source-map-support": "^0.5.21",
+        "zod": "^3.22.2"
     },
     "devDependencies": {
         "@remix-run/dev": "^1.19.3",
