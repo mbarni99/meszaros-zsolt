@@ -35,8 +35,6 @@ type ContactSchema = z.infer<typeof ContactSchema>;
 export const action: ActionFunction = async ({ request }: ActionArgs) => {
     const formData = await request.formData();
 
-    console.log('SENDGRID_API_KEY', process.env.SENDGRID_API_KEY as string);
-
     sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
     const contactInput = {
@@ -44,8 +42,6 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
         sender: formData.get('sender') as string,
         subject: formData.get('subject') as string,
     };
-
-    console.log('contactInput', contactInput);
 
     const validatedContactInput: ContactSchema = ContactSchema.parse(contactInput);
 
@@ -57,8 +53,6 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
         // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     };
 
-    console.log('messageToSender', messageToSender);
-
     const messageToOwner = {
         to: 'zsoltm340@gmail.com',
         from: 'zsoltm340@gmail.com',
@@ -68,7 +62,7 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
     };
 
     try {
-        // await sgMail.send(messageToOwner);
+        await sgMail.send(messageToOwner);
         await sgMail.send(messageToSender);
     } catch (error: any) {
         console.error(error);
@@ -94,8 +88,6 @@ export default function Contact() {
     const [message, setMessage] = useState('');
     const [sender, setSender] = useState('');
     const [subject, setSubject] = useState('');
-
-    console.log('actionData', actionData);
 
     return (
         <Grid alignItems={'stretch'} container justifyContent={'center'} p={1} xs={12}>
