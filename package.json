@@ -16,6 +16,7 @@
         "@remix-run/node": "^1.19.3",
         "@remix-run/react": "^1.19.3",
         "@remix-run/vercel": "^1.19.3",
+        "@sendgrid/mail": "^7.7.0",
         "@vercel/node": "^2.10.3",
         "i18next": "^23.4.4",
         "i18next-browser-languagedetector": "^7.1.0",
@@ -27,7 +28,8 @@
         "react-responsive": "^9.0.2",
         "react-world-flags": "^1.5.1",
         "remix-i18next": "^5.3.0",
-        "source-map-support": "^0.5.21"
+        "source-map-support": "^0.5.21",
+        "zod": "^3.22.2"
     },
     "devDependencies": {
         "@remix-run/dev": "^1.19.3",
