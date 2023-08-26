@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
-import { redirect } from '@remix-run/node';
+import Alert from '@mui/material/Alert';
 import Chip from '@mui/material/Chip';
 import ClassIcon from '@mui/icons-material/Class';
 import EmailIcon from '@mui/icons-material/Email';
@@ -14,10 +14,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import PhoneIcon from '@mui/icons-material/Phone';
 import SendIcon from '@mui/icons-material/Send';
 import sgMail from '@sendgrid/mail';
+import Snackbar from '@mui/material/Snackbar';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { z } from 'zod';
 import type { ActionArgs, ActionFunction, V2_MetaFunction } from '@remix-run/node';
+import type { SendGridError } from '~/types/SendGridError';
 
 const lengths = { message: 1000, sender: 50, subject: 100 };
 
@@ -63,13 +65,11 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
 
     try {
         await sgMail.send(messageToOwner);
-        await sgMail.send(messageToSender);
+        return await sgMail.send(messageToSender);
     } catch (error: any) {
-        console.error(error);
-        if (error.response) console.error(error.response.body);
+        error?.response?.body.errors?.map((error: SendGridError) => console.error(error.message));
+        return error;
     }
-
-    return redirect('/contact');
 };
 
 export const meta: V2_MetaFunction = () => [
@@ -85,102 +85,122 @@ export default function Contact() {
     const actionData = useActionData();
     const { state } = useNavigation();
 
-    const [message, setMessage] = useState('');
-    const [sender, setSender] = useState('');
-    const [subject, setSubject] = useState('');
+    const [message, setMessage] = useState<string>('');
+    const [open, setOpen] = useState<boolean>(false);
+    const [sender, setSender] = useState<string>('');
+    const [subject, setSubject] = useState<string>('');
+
+    console.log(actionData);
+
+    useEffect(() => setOpen(actionData?.[0]?.statusCode === 202), [JSON.stringify(actionData)]);
 
     return (
-        <Grid alignItems={'stretch'} container justifyContent={'center'} p={1} xs={12}>
-            <Grow in>
-                <Grid md={5} p={1} sm={6} xl={4} xs={12}>
-                    <section id={'section-contact-data'}>
-                        <Grid xs={12}>
-                            <Typography variant={isMobile ? 'h5' : 'h4'}>{t('contact_data_title')}</Typography>
-                        </Grid>
-                        <Grid py={1} xs={12}>
-                            <Typography align={'justify'} color={'text.secondary'}>
-                                {t('contact_data_description')}
-                            </Typography>
-                        </Grid>
-                        <Grid py={1} xs={12}>
-                            <Chip icon={<PhoneIcon />} label={t('contact_data_phone_number')} />
-                        </Grid>
-                        <Grid py={1} xs={12}>
-                            <Chip icon={<EmailIcon />} label={t('contact_data_email_address')} />
-                        </Grid>
-                        <Grid py={1} xs={12}>
-                            <Chip icon={<HomeIcon />} label={t('contact_data_address')} />
-                        </Grid>
-                    </section>
-                </Grid>
-            </Grow>
-            <Grow in>
-                <Grid md={5} p={1} sm={6} xl={4} xs={12}>
-                    <section id={'section-contact-form'}>
-                        <Grid pb={2} xs={12}>
-                            <Typography variant={'h6'}>{t('contact_form_title')}</Typography>
-                        </Grid>
-                        <Form method={'post'}>
-                            <TextField
-                                inputProps={{ maxLength: lengths.sender }}
-                                InputProps={{
-                                    endAdornment: <InputAdornment position={'end'}>{`${sender?.length}/${lengths.sender}`}</InputAdornment>,
-                                    startAdornment: (
-                                        <InputAdornment position={'start'}>
-                                            <EmailIcon />
-                                        </InputAdornment>
-                                    ),
-                                    sx: { borderRadius: '20px' },
-                                }}
-                                label={t('contact_form_sender')}
-                                name={'sender'}
-                                type={'email'}
-                                onChange={(e) => setSender(e.target.value)}
-                                value={sender}
-                            />
-                            <TextField
-                                inputProps={{ maxLength: lengths.subject }}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position={'end'}>{`${subject?.length}/${lengths.subject}`}</InputAdornment>
-                                    ),
-                                    startAdornment: (
-                                        <InputAdornment position={'start'}>
-                                            <ClassIcon />
-                                        </InputAdornment>
-                                    ),
-                                    sx: { borderRadius: '20px' },
-                                }}
-                                label={t('contact_form_subject')}
-                                name={'subject'}
-                                onChange={(e) => setSubject(e.target.value)}
-                                value={subject}
-                            />
-                            <TextField
-                                inputProps={{ maxLength: lengths.message }}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position={'end'}>{`${message?.length}/${lengths.message}`}</InputAdornment>
-                                    ),
-                                    sx: { borderRadius: '20px' },
-                                }}
-                                label={t('contact_form_message')}
-                                maxRows={12}
-                                minRows={8}
-                                multiline
-                                name={'message'}
-                                onChange={(e) => setMessage(e.target.value)}
-                                value={message}
-                            />
-                            <Grid pt={2} xs={12}>
-                                <LoadingButton endIcon={<SendIcon />} loading={state === 'submitting'} type={'submit'}>
-                                    {t('contact_form_submit')}
-                                </LoadingButton>
+        <Fragment>
+            <Snackbar
+                anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+                autoHideDuration={5000}
+                open={open}
+                onClose={() => setOpen(false)}
+            >
+                <Alert onClose={() => setOpen(false)} severity={'success'} sx={{ width: '100%' }}>
+                    {t('contact_form_submit_success')}
+                </Alert>
+            </Snackbar>
+
+            <Grid alignItems={'stretch'} container justifyContent={'center'} p={1} xs={12}>
+                <Grow in>
+                    <Grid md={5} p={1} sm={6} xl={4} xs={12}>
+                        <section id={'section-contact-data'}>
+                            <Grid xs={12}>
+                                <Typography variant={isMobile ? 'h5' : 'h4'}>{t('contact_data_title')}</Typography>
                             </Grid>
-                        </Form>
-                    </section>
-                </Grid>
-            </Grow>
-        </Grid>
+                            <Grid py={1} xs={12}>
+                                <Typography align={'justify'} color={'text.secondary'}>
+                                    {t('contact_data_description')}
+                                </Typography>
+                            </Grid>
+                            <Grid py={1} xs={12}>
+                                <Chip icon={<PhoneIcon />} label={t('contact_data_phone_number')} />
+                            </Grid>
+                            <Grid py={1} xs={12}>
+                                <Chip icon={<EmailIcon />} label={t('contact_data_email_address')} />
+                            </Grid>
+                            <Grid py={1} xs={12}>
+                                <Chip icon={<HomeIcon />} label={t('contact_data_address')} />
+                            </Grid>
+                        </section>
+                    </Grid>
+                </Grow>
+                <Grow in>
+                    <Grid md={5} p={1} sm={6} xl={4} xs={12}>
+                        <section id={'section-contact-form'}>
+                            <Grid pb={2} xs={12}>
+                                <Typography variant={'h6'}>{t('contact_form_title')}</Typography>
+                            </Grid>
+                            <Form method={'post'}>
+                                <TextField
+                                    inputProps={{ maxLength: lengths.sender }}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position={'end'}>{`${sender?.length}/${lengths.sender}`}</InputAdornment>
+                                        ),
+                                        startAdornment: (
+                                            <InputAdornment position={'start'}>
+                                                <EmailIcon />
+                                            </InputAdornment>
+                                        ),
+                                        sx: { borderRadius: '20px' },
+                                    }}
+                                    label={t('contact_form_sender')}
+                                    name={'sender'}
+                                    type={'email'}
+                                    onChange={(e) => setSender(e.target.value)}
+                                    value={sender}
+                                />
+                                <TextField
+                                    inputProps={{ maxLength: lengths.subject }}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position={'end'}>{`${subject?.length}/${lengths.subject}`}</InputAdornment>
+                                        ),
+                                        startAdornment: (
+                                            <InputAdornment position={'start'}>
+                                                <ClassIcon />
+                                            </InputAdornment>
+                                        ),
+                                        sx: { borderRadius: '20px' },
+                                    }}
+                                    label={t('contact_form_subject')}
+                                    name={'subject'}
+                                    onChange={(e) => setSubject(e.target.value)}
+                                    value={subject}
+                                />
+                                <TextField
+                                    inputProps={{ maxLength: lengths.message }}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position={'end'}>{`${message?.length}/${lengths.message}`}</InputAdornment>
+                                        ),
+                                        sx: { borderRadius: '20px' },
+                                    }}
+                                    label={t('contact_form_message')}
+                                    maxRows={12}
+                                    minRows={8}
+                                    multiline
+                                    name={'message'}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    value={message}
+                                />
+                                <Grid pt={2} xs={12}>
+                                    <LoadingButton endIcon={<SendIcon />} loading={state === 'submitting'} type={'submit'}>
+                                        {t('contact_form_submit')}
+                                    </LoadingButton>
+                                </Grid>
+                            </Form>
+                        </section>
+                    </Grid>
+                </Grow>
+            </Grid>
+        </Fragment>
     );
 }
