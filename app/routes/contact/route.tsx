@@ -113,13 +113,13 @@ export default function Contact() {
                                 <Typography variant={isMobile ? 'h5' : 'h4'}>{t('contact_data_title')}</Typography>
                             </Grid>
                             <Grid py={1} xs={12}>
-                                <Chip icon={<PhoneIcon />} label={t('contact_data_phone_number')} />
+                                <Chip icon={<PhoneIcon />} label={t('contact_data_phone_number')} sx={{ fontSize: 18 }} />
                             </Grid>
                             <Grid py={1} xs={12}>
-                                <Chip icon={<EmailIcon />} label={t('contact_data_email_address')} />
+                                <Chip icon={<EmailIcon />} label={t('contact_data_email_address')} sx={{ fontSize: 18 }} />
                             </Grid>
                             <Grid py={1} xs={12}>
-                                <Chip icon={<HomeIcon />} label={t('contact_data_address')} />
+                                <Chip icon={<HomeIcon />} label={t('contact_data_address')} sx={{ fontSize: 18 }} />
                             </Grid>
                         </section>
                     </Grid>
