@@ -90,8 +90,6 @@ export default function Contact() {
     const [sender, setSender] = useState<string>('');
     const [subject, setSubject] = useState<string>('');
 
-    console.log(actionData);
-
     useEffect(() => setOpen(actionData?.[0]?.statusCode === 202), [JSON.stringify(actionData)]);
 
     return (
@@ -113,11 +111,6 @@ export default function Contact() {
                         <section id={'section-contact-data'}>
                             <Grid xs={12}>
                                 <Typography variant={isMobile ? 'h5' : 'h4'}>{t('contact_data_title')}</Typography>
-                            </Grid>
-                            <Grid py={1} xs={12}>
-                                <Typography align={'justify'} color={'text.secondary'}>
-                                    {t('contact_data_description')}
-                                </Typography>
                             </Grid>
                             <Grid py={1} xs={12}>
                                 <Chip icon={<PhoneIcon />} label={t('contact_data_phone_number')} />
