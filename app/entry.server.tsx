@@ -1,74 +1,65 @@
-import { PassThrough } from 'stream';
-import type { EntryContext } from '@remix-run/node';
-import { Response } from '@remix-run/node';
-import { RemixServer } from '@remix-run/react';
-import isbot from 'isbot';
-import { renderToPipeableStream } from 'react-dom/server';
-import { createInstance } from 'i18next';
-import i18next from './i18next.server';
-import { I18nextProvider, initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+import { createInstance } from 'i18next';
+import CssBaseline from '@mui/material/CssBaseline';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { renderToString } from 'react-dom/server';
+import { RemixServer } from '@remix-run/react';
 import { resolve } from 'node:path';
+import { Response } from '@remix-run/node';
+import { ThemeProvider } from '@mui/material/styles';
+import type { EntryContext } from '@remix-run/node';
 
+import createEmotionCache from './utilities/createEmotionCache';
 import i18n from './i18n';
+import i18next from './i18next.server';
+import theme from './utilities/theme';
 
-const ABORT_DELAY = 5000;
-
-export default async function handleRequest(
-    request: Request,
-    responseStatusCode: number,
-    responseHeaders: Headers,
-    remixContext: EntryContext
-) {
-    let callbackName = isbot(request.headers.get('user-agent')) ? 'onAllReady' : 'onShellReady';
-
-    let instance = createInstance();
-    let lng = await i18next.getLocale(request);
-    let ns = i18next.getRouteNamespaces(remixContext);
+export default async function handleRequest(request: Request, responseStatusCode: number, responseHeaders: Headers, remixContext: EntryContext) {
+    const instance = createInstance();
+    const lng = await i18next.getLocale(request);
+    const ns = i18next.getRouteNamespaces(remixContext);
 
     await instance
-        .use(initReactI18next) // Tell our instance to use react-i18next
-        .use(Backend) // Setup our backend
-        .init({
-            ...i18n, // spread the configuration
-            lng, // The locale we detected above
-            ns, // The namespaces the routes about to render wants to use
-            backend: { loadPath: resolve('./public/locales/{{lng}}/{{ns}}.json') },
-        });
+        .use(initReactI18next)
+        .use(Backend)
+        .init({ ...i18n, backend: { loadPath: resolve('./public/locales/{{lng}}/{{ns}}.json') }, lng, ns });
 
-    return new Promise((resolve, reject) => {
-        let didError = false;
+    const cache = createEmotionCache();
+    const { extractCriticalToChunks } = createEmotionServer(cache);
 
-        let { pipe, abort } = renderToPipeableStream(
-            <I18nextProvider i18n={instance}>
-                <RemixServer context={remixContext} url={request.url} />
-            </I18nextProvider>,
-            {
-                [callbackName]: () => {
-                    let body = new PassThrough();
-
-                    responseHeaders.set('Content-Type', 'text/html');
-
-                    resolve(
-                        new Response(body, {
-                            headers: responseHeaders,
-                            status: didError ? 500 : responseStatusCode,
-                        })
-                    );
-
-                    pipe(body);
-                },
-                onShellError(error: unknown) {
-                    reject(error);
-                },
-                onError(error: unknown) {
-                    didError = true;
-
-                    console.error(error);
-                },
-            }
+    function MuiRemixServer() {
+        return (
+            <CacheProvider value={cache}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <I18nextProvider i18n={instance}>
+                        <RemixServer context={remixContext} url={request.url} />
+                    </I18nextProvider>
+                </ThemeProvider>
+            </CacheProvider>
         );
+    }
 
-        setTimeout(abort, ABORT_DELAY);
+    const html = renderToString(<MuiRemixServer />);
+
+    const { styles } = extractCriticalToChunks(html);
+
+    let stylesHTML = '';
+
+    styles.forEach(({ key, ids, css }) => {
+        const emotionKey = `${key} ${ids.join(' ')}`;
+        const newStyleTag = `<style data-emotion="${emotionKey}">${css}</style>`;
+        stylesHTML = `${stylesHTML}${newStyleTag}`;
     });
+
+    const markup = html.replace(
+        /<meta(\s)*name="emotion-insertion-point"(\s)*content="emotion-insertion-point"(\s)*\/>/,
+        `<meta name="emotion-insertion-point" content="emotion-insertion-point"/>${stylesHTML}`
+    );
+
+    responseHeaders.set('Content-Type', 'text/html');
+
+    return new Response(`<!DOCTYPE html>${markup}`, { headers: responseHeaders, status: responseStatusCode });
 }
