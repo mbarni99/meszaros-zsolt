@@ -10,11 +10,11 @@ interface ServiceCardProps {
     title: string;
 }
 
-export default function ServiceCard({ description, title }: ServiceCardProps) {
+export default function ServiceCard({ description, image, title }: ServiceCardProps) {
     return (
         <Grid md={4} sm={6} p={1} xl={3} xs={12}>
             <Card sx={{ height: '100%' }}>
-                <CardMedia sx={{ height: 140 }} image="/static/images/cards/contemplative-reptile.jpg" title={title} />
+                <CardMedia sx={{ height: 200 }} image={image} title={title} />
                 <CardContent>
                     <Typography component={'div'} gutterBottom variant={'h5'}>
                         {title}
