@@ -19,9 +19,7 @@ export default function ServiceCard({ description, image, title }: ServiceCardPr
                     <Typography component={'div'} gutterBottom variant={'h5'}>
                         {title}
                     </Typography>
-                    <Typography align={'justify'} color={'text.secondary'}>
-                        {description}
-                    </Typography>
+                    <Typography color={'text.secondary'}>{description}</Typography>
                 </CardContent>
             </Card>
         </Grid>
