@@ -41,7 +41,7 @@ export default function OurServices() {
                 <ServiceCard description={t('service_5_description')} image={lightingImage} title={t('service_5_title')} />
                 <ServiceCard description={t('service_6_description')} image={heatingImage} title={t('service_6_title')} />
                 <ServiceCard description={t('service_7_description')} image={powerOutletImage} title={t('service_7_title')} />
-                <ServiceCard description={t('service_8_description')} image={electricGateImage} title={t('service_8_title')} />
+                {/* <ServiceCard description={t('service_8_description')} image={electricGateImage} title={t('service_8_title')} /> */}
                 <ServiceCard description={t('service_9_description')} image={householdApplianceImage} title={t('service_9_title')} />
                 <ServiceCard description={t('service_10_description')} image={electricVehicleImage} title={t('service_10_title')} />
                 <ServiceCard description={t('service_11_description')} image={antennaImage} title={t('service_11_title')} />
