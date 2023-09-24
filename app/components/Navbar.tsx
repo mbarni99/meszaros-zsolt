@@ -98,7 +98,6 @@ export default function Navbar() {
                                 component={Link}
                                 key={index}
                                 sx={{
-                                    borderColor: 'black',
                                     color: 'inherit',
                                     display: 'block',
                                     fontWeight: 'bold',

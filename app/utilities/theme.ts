@@ -9,7 +9,12 @@ const theme = createTheme({
         },
         MuiTextField: { defaultProps: { fullWidth: true, margin: 'dense', size: 'small' } },
     },
-    palette: { primary: { main: '#FFE133' } },
+    palette: {
+        primary: {
+            // main: '#2F2F2F',
+            main: '#FDFD0E',
+        },
+    },
 });
 
 export default theme;
