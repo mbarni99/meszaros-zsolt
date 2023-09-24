@@ -1,10 +1,6 @@
 import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
-// import Accordion from '@mui/material/Accordion';
-// import AccordionSummary from '@mui/material/AccordionSummary';
-// import AccordionDetails from '@mui/material/AccordionDetails';
 import ElectricCarIcon from '@mui/icons-material/ElectricCar';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Unstable_Grid2';
 import Grow from '@mui/material/Grow';
 import List from '@mui/material/List';
@@ -53,41 +49,6 @@ export default function Index() {
                     </section>
                 </Grid>
             </Grow>
-            {/* <Grow in>
-                <Grid md={5} p={1} sm={6} xl={4} xs={12}>
-                    <section id={'section-faq'}>
-                        <Grid pb={isMobile ? 2 : 4} pt={isMobile ? 1 : 4} xs={12}>
-                            <Typography align={isMobile ? 'center' : undefined} variant={isMobile ? 'h5' : 'h4'}>
-                                {t('home_title_faq')}
-                            </Typography>
-                        </Grid>
-                        <Accordion>
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography>{t('home_faq_1_title')}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>{t('home_faq_1_description')}</AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography>{t('home_faq_2_title')}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>{t('home_faq_2_description')}</AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography>{t('home_faq_3_title')}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>{t('home_faq_3_description')}</AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography>{t('home_faq_4_title')}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>{t('home_faq_4_description')}</AccordionDetails>
-                        </Accordion>
-                    </section>
-                </Grid>
-            </Grow> */}
         </Grid>
     );
 }
