@@ -46,25 +46,15 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
 
     const validatedContactInput: ContactSchema = ContactSchema.parse(contactInput);
 
-    const messageToSender = {
-        to: validatedContactInput.sender,
-        from: 'zsoltm340@gmail.com',
-        subject: validatedContactInput.subject,
-        text: validatedContactInput.message,
-        // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-    };
-
-    const messageToOwner = {
+    const message = {
         to: 'zsoltm340@gmail.com',
         from: 'zsoltm340@gmail.com',
         subject: validatedContactInput.subject,
         text: validatedContactInput.message,
-        // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     };
 
     try {
-        await sgMail.send(messageToOwner);
-        return await sgMail.send(messageToSender);
+        await sgMail.send(message);
     } catch (error: any) {
         error?.response?.body.errors?.map((error: any) => console.error(error.message));
         return error;
