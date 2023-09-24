@@ -6,6 +6,7 @@ import type { V2_MetaFunction } from '@remix-run/node';
 
 import ServiceCard from '~/components/ServiceCard';
 
+import antennaImage from '~/assets/antenna-image.jpg';
 import distributionBoxImage from '~/assets/distribution-box-image.jpg';
 import electricalInstallationImage from '~/assets/electrical-installation-image.jpg';
 import electricalRenovationImage from '~/assets/electrical-renovation-image.jpg';
@@ -43,6 +44,7 @@ export default function OurServices() {
                 <ServiceCard description={t('service_8_description')} image={electricGateImage} title={t('service_8_title')} />
                 <ServiceCard description={t('service_9_description')} image={householdApplianceImage} title={t('service_9_title')} />
                 <ServiceCard description={t('service_10_description')} image={electricVehicleImage} title={t('service_10_title')} />
+                <ServiceCard description={t('service_11_description')} image={antennaImage} title={t('service_11_title')} />
             </Grid>
         </Grow>
     );
