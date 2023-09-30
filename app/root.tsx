@@ -50,6 +50,7 @@ const Document = withEmotionCache(({ children, i18n, locale, title }: DocumentPr
     return (
         <html dir={i18n?.dir()} lang={locale || 'en'}>
             <head>
+                <meta name={'google-site-verification'} content={'6vHemWGPiltrxcQXiZ7ko4pvgY1dcifYjSaYnGSUrQM'} />
                 <meta charSet={'utf-8'} />
                 <meta name={'viewport'} content={'width=device-width,initial-scale=1'} />
                 <meta name={'theme-color'} content={theme.palette.primary.main} />
