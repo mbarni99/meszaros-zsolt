@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react';
 import { ReactNode, useContext } from 'react';
 import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/material';
@@ -62,6 +63,7 @@ const Document = withEmotionCache(({ children, i18n, locale, title }: DocumentPr
             </head>
             <body>
                 {children}
+                <Analytics />
                 <ScrollRestoration />
                 <Scripts />
                 <LiveReload />
