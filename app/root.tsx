@@ -5,7 +5,7 @@ import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/material';
 import { useChangeLanguage } from 'remix-i18next';
 import { useTranslation } from 'react-i18next';
 import { withEmotionCache } from '@emotion/react';
-import type { LoaderArgs, LoaderFunction, V2_MetaFunction } from '@remix-run/node';
+import type { HeadersFunction, LoaderArgs, LoaderFunction, V2_MetaFunction } from '@remix-run/node';
 
 import ClientStyleContext from './utilities/ClientStyleContext';
 import i18next from '~/i18next.server';
@@ -18,6 +18,10 @@ interface DocumentProps {
     i18n?: any;
     title?: string;
 }
+
+export const headers: HeadersFunction = () => ({
+    'Content-Security-Policy': 'connect-src https://vitals.vercel-insights.com',
+});
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => ({ locale: await i18next.getLocale(request) });
 
