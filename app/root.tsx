@@ -20,7 +20,8 @@ interface DocumentProps {
 }
 
 export const headers: HeadersFunction = () => ({
-    'Content-Security-Policy': "default-src 'self'; img-src *; style-src 'self' 'unsafe-inline'; connect-src vitals.vercel-insights.com",
+    'Content-Security-Policy':
+        "default-src 'self'; img-src *; style-src 'self' 'unsafe-inline'; script-src 'unsafe-inline'; connect-src vitals.vercel-insights.com",
 });
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => ({ locale: await i18next.getLocale(request) });
