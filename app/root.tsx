@@ -20,7 +20,7 @@ interface DocumentProps {
 }
 
 export const headers: HeadersFunction = () => ({
-    'Content-Security-Policy': 'connect-src https://vitals.vercel-insights.com',
+    'Content-Security-Policy': "default-src 'self'; connect-src https://vitals.vercel-insights.com",
 });
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => ({ locale: await i18next.getLocale(request) });
