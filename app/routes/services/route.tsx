@@ -6,7 +6,7 @@ import type { V2_MetaFunction } from '@remix-run/node';
 
 import ServiceCard from '~/components/ServiceCard';
 
-import antennaImage from '~/assets/antenna-image.jpg';
+import antennaImage from '~/assets/antenna-image.png';
 import distributionBoxImage from '~/assets/distribution-box-image.jpg';
 import electricalInstallationImage from '~/assets/electrical-installation-image.jpg';
 import electricalRenovationImage from '~/assets/electrical-renovation-image.jpg';
