@@ -1,4 +1,4 @@
-import { Fragment, MouseEvent, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from '@remix-run/react';
@@ -28,6 +28,7 @@ export default function Navbar() {
     const links = [
         { route: '/', translationKey: 'navbar_home' },
         { route: '/services', translationKey: 'navbar_services' },
+        { route: '/references', translationKey: 'navbar_references' },
         { route: '/contact', translationKey: 'navbar_contact' },
     ];
 
@@ -56,7 +57,7 @@ export default function Navbar() {
                             aria-label={'account of current user'}
                             aria-controls={'menu-appbar'}
                             aria-haspopup={'true'}
-                            onClick={(event: MouseEvent<HTMLElement>) => setAnchorElNav(event.currentTarget)}
+                            onClick={(event) => setAnchorElNav(event.currentTarget)}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -112,7 +113,7 @@ export default function Navbar() {
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         {isTabletOrMobile ? (
-                            <IconButton onClick={(event: MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget)} sx={{ p: 0 }}>
+                            <IconButton onClick={(event) => setAnchorElUser(event.currentTarget)} sx={{ p: 0 }}>
                                 <PublicIcon fontSize={'large'} />
                             </IconButton>
                         ) : (

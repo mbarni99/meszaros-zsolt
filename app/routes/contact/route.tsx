@@ -1,5 +1,4 @@
 import { Fragment, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
 import Alert from '@mui/material/Alert';
 import Chip from '@mui/material/Chip';
@@ -9,8 +8,9 @@ import Grow from '@mui/material/Grow';
 import HomeIcon from '@mui/icons-material/Home';
 import PhoneIcon from '@mui/icons-material/Phone';
 import Snackbar from '@mui/material/Snackbar';
-import Typography from '@mui/material/Typography';
 import type { V2_MetaFunction } from '@remix-run/node';
+
+import RouteTitle from '~/components/RouteTitle';
 
 export const meta: V2_MetaFunction = () => [
     { name: 'description', content: 'Keressen minket bizalommal!' },
@@ -19,8 +19,6 @@ export const meta: V2_MetaFunction = () => [
 
 export default function Contact() {
     const { t } = useTranslation();
-
-    const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
 
     const [open, setOpen] = useState<boolean>(false);
 
@@ -32,23 +30,19 @@ export default function Contact() {
                 </Alert>
             </Snackbar>
 
-            <Grid alignItems={'stretch'} container justifyContent={'center'} p={1} xs={12}>
+            <Grid container justifyContent={'center'} p={1} xs={12}>
                 <Grow in>
                     <Grid md={5} p={1} sm={6} xl={4} xs={12}>
-                        <section id={'section-contact-data'}>
-                            <Grid xs={12}>
-                                <Typography variant={isMobile ? 'h5' : 'h4'}>{t('contact_data_title')}</Typography>
-                            </Grid>
-                            <Grid py={1} xs={12}>
-                                <Chip icon={<PhoneIcon />} label={t('contact_data_phone_number')} sx={{ fontSize: 18 }} />
-                            </Grid>
-                            <Grid py={1} xs={12}>
-                                <Chip icon={<EmailIcon />} label={t('contact_data_email_address')} sx={{ fontSize: 18 }} />
-                            </Grid>
-                            <Grid py={1} xs={12}>
-                                <Chip icon={<HomeIcon />} label={t('contact_data_address')} sx={{ fontSize: 18 }} />
-                            </Grid>
-                        </section>
+                        <RouteTitle title={t('contact_data_title')} />
+                        <Grid py={1} xs={12}>
+                            <Chip icon={<PhoneIcon />} label={t('contact_data_phone_number')} sx={{ fontSize: 18 }} />
+                        </Grid>
+                        <Grid py={1} xs={12}>
+                            <Chip icon={<EmailIcon />} label={t('contact_data_email_address')} sx={{ fontSize: 18 }} />
+                        </Grid>
+                        <Grid py={1} xs={12}>
+                            <Chip icon={<HomeIcon />} label={t('contact_data_address')} sx={{ fontSize: 18 }} />
+                        </Grid>
                     </Grid>
                 </Grow>
                 {/* <Grow in>

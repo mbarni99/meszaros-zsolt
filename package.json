@@ -42,7 +42,8 @@
         "typescript": "^5.5.3"
     },
     "engines": {
-        "node": ">=20.15.1"
+        "node": ">=20",
+        "npm": ">=10"
     },
     "prettier": {
         "jsxSingleQuote:": true,
